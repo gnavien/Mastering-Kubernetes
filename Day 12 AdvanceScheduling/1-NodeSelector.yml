@@ -18,7 +18,7 @@ spec:
       - image: kiran2361993/kubegame:v2
         name: kubegame
       nodeSelector:
-        kubernetes.io/hostname: i-00a968443bbbdd1cf
+        kubernetes.io/hostname: i-0af5f71a92c2c8981
 
 #kubectl get pods -o wide --no-headers |  awk -F"  " '{print $1 $8}'
 
@@ -43,4 +43,4 @@ spec:
       - image: kiran2361993/kubegame:v2
         name: kubegame
       nodeSelector:
-        high-perf-cpu: "yes"
+        low-perf-cpu: "yes"

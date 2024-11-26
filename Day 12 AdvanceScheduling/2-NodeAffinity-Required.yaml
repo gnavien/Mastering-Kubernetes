@@ -29,6 +29,7 @@ spec:
                 values:
                 - one
                 - two
+                - three
       containers:
       - image: nginx:latest
         name: required-hard
