@@ -38,8 +38,19 @@ eksctl create cluster \
 
 #Install java & jenkins
 
+
+
 sudo apt install -y openjdk-11-jdk
 
+sudo apt install -y openjdk-17-jdk
+
+sudo wget -O /usr/share/keyrings/jenkins-keyring.asc \
+https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc]" \
+https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+/etc/apt/sources.list.d/jenkins.list > /dev/null
+sudo apt-get update
+sudo apt-get install jenkins
 
 #INSTALL  REQUIRED PLUGINS 
 #  AWS
@@ -61,6 +72,12 @@ eksctl utils associate-iam-oidc-provider \
 # create nodegroup, If production go with the private . We using local so lets o with the Public only.
 
 #For Node Group In Public Subnet
+
+# Creation of ssh-public-key
+
+aws ec2 create-key-pair --key-name QA-Account --query 'KeyMaterial' --output text > QA-Account.pem
+chmod 400 QA-Account.pem
+
 
 eksctl create nodegroup --cluster=eks-cluster-1 \
 --region=us-east-1 \
